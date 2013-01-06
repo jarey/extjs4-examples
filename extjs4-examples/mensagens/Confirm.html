@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript">
+            Ext.onReady(function() {
+                Ext.MessageBox.confirm('Sair', 
+                                       'Deseja mesmo sair da aplicação?',
+                                       function(botao) {
+                                           if (botao == 'yes') {
+                                               Ext.MessageBox.alert('Sair', 'Adeus....');
+                                           } else {
+                                               Ext.MessageBox.alert('Sair', 'Obrigado...');
+                                           }
+                                       });
+            });
+        </script>
+    </head>
+</html>

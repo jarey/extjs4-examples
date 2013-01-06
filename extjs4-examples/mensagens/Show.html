@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.onReady(function() {
+                Ext.get('ok').on('click', function() {
+                    // Mensagem de OK
+                    Ext.MessageBox.show({
+                        title: 'OK',
+                        msg: 'Dados salvos com sucesso!',
+                        width: 250,
+                        buttons: Ext.MessageBox.OK,
+                        icon: Ext.MessageBox.INFO
+                    });
+                });
+
+                Ext.get('error').on('click', function(){
+                    // Mensagem de Erro
+                    Ext.MessageBox.show({
+                        title: 'Erro',
+                        msg: 'Ocorreu um erro genérico ao invocar a operação.',
+                        width: 250,
+                        buttons: Ext.MessageBox.OK,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                });
+                
+                Ext.get('warning').on('click', function() {
+                    // Mensagem de aviso
+                    Ext.MessageBox.show({
+                        title: 'Aviso',
+                        msg: 'Selecione o tipo de operação antes de prosseguir.',
+                        buttons: Ext.MessageBox.OK,
+                        icon: Ext.MessageBox.WARNING
+                    });
+                });                
+
+            });
+        </script>
+    </head>
+    <body>
+        <input type="button" id="ok" value="OK" />
+        <input type="button" id="error" value="Error" />
+        <input type="button" id="warning" value="Warning" />
+    </body>
+</html>

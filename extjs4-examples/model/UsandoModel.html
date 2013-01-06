@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.define('Patient', {
+                extend: 'Ext.data.Model',
+                fields: [
+                    {name: 'name'},
+                    {name: 'age', type: 'int'},
+                    {name: 'phone', type: 'string'},
+                    {name: 'gender', type: 'string'},
+                    {name: 'birthday', type: 'date', dateFormat: 'm/d/Y'},
+                    {name: 'alive', type: 'boolean', defaultValue: true},
+                    {name: 'weight', type: 'float'},
+                    {name: 'weightKg', type: 'float', 
+                        convert: function(value, record) {
+                            var weightPounds = record.get('weight');
+                            return Math.round(weightPounds * 0.45359237);
+                        }
+                    }
+                ]
+            });
+
+            Ext.onReady(function() {
+                var patient = Ext.create('Patient', {
+                    name: 'Loiane Groner',
+                    age: 25,
+                    phone: '9876-5432',
+                    gender: 'F',
+                    birthday: '05/26/1986',
+                    weight: 150
+                });
+
+                console.log("patient.get('name'): " + patient.get('name'));
+                console.log("patient.get('age'): " + patient.get('age'));
+                console.log("patient.get('phone'): " + patient.get('phone'));
+                console.log("patient.get('gender'): " + patient.get('gender'));
+                console.log("patient.get('birthday'): " + patient.get('birthday'));
+                console.log("patient.get('weight'): " + patient.get('weight'));
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

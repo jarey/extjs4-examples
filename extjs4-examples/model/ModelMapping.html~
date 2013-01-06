@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.define('Cliente', {
+                extend: 'Ext.data.Model',
+                fields: [
+                    {name: 'id', type: 'id'},
+                    {name: 'nome', type: 'string'},
+                    {name: 'sexo', type: 'string'},
+                    {name: 'dataNascimento', type: 'date', dateFormat: 'Y-m-d'},
+                    {name: 'logradouro', mapping: 'endereco.logradouro', type: 'string'},
+                    {name: 'complemento', mapping: 'endereco.complemento', type: 'string'},
+                    {name: 'bairro', mapping: 'endereco.bairro', type: 'string'},
+                    {name: 'cidade', mapping: 'endereco.cidade', type: 'string'},
+                    {name: 'uf', mapping: 'endereco.uf', type: 'string'},
+                    {name: 'cep', mapping: 'endereco.cep', type: 'string'}
+                ],
+                idProperty: 'id'
+            });
+
+            Ext.define('MyApp.store.ClienteStore', {
+                extend: 'Ext.data.Store',
+                model: 'Cliente',
+                proxy: {
+                    type: 'ajax',
+                    reader: {
+                        type: 'json'
+                    }
+                }
+            });
+          
+
+            Ext.onReady(function() {
+                var response = {
+                                   id: 1,
+                                   nome: 'Alexandre Arcanjo de Queiroz',
+                                   sexo: 'M',
+                                   dataNascimento: '1986-12-16',
+                                   endereco: {
+                                       logradouro: 'Avenida Paes de Barros, 1145',
+                                       complemento: null,
+                                       bairro: 'Mooca',
+                                       cidade: 'São Paulo',
+                                       uf: 'SP',
+                                       cep: '05248-555'
+                                   }
+               };
+
+               var clienteStore = Ext.create('MyApp.store.ClienteStore');
+
+               console.log();
+               console.log('Quantidade de clientes carregados: ' + clienteStore.getCount());
+
+               /* Carrega json */
+               clienteStore.loadRawData(response);
+               console.log('Carregando JSON via JavaScript...');
+
+               console.log('Quantidade de clientes carregados: ' + clienteStore.getCount());
+               console.log();
+
+               console.log('Clientes: ');
+               console.log();
+
+               /* Percorre todos os elementos */
+               clienteStore.each(function(cliente) {
+                   console.log('\tID: ' + cliente.get('id'));
+                   console.log('\tNome: ' + cliente.get('nome'));
+                   console.log('\tSexo: ' + cliente.get('sexo'));
+                   console.log('\tData de Nascimento: ' + cliente.get('dataNascimento'));
+                   console.log('\tLogradouro: ' + cliente.get('logradouro'));
+                   console.log('\tComplemento: ' + cliente.get('complemento'));
+                   console.log('\tBairro: ' + cliente.get('bairro'));
+                   console.log('\tCidade: ' + cliente.get('cidade'));
+                   console.log('\tUF: ' + cliente.get('uf'));
+                   console.log('\tCEP: ' + cliente.get('cep'));
+                   console.log();
+               });
+
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

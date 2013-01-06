@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+
+            // Definindo Data Model
+            Ext.define('Usuario', {
+                extend: 'Ext.data.Model',
+                fields: [
+                    {name: 'codigo', type: 'int'},
+                    {name: 'nome',  type: 'string'}
+                ],
+                idProperty: 'codigo'
+            });
+
+            // Criando objeto Store para armazenar dados
+            Ext.define('MyApp.store.UsuarioStore', {
+                extend: 'Ext.data.Store',
+                model: 'Usuario'
+            });
+
+            // Definindo UsuarioPanel
+            Ext.define('MyApp.view.UsuarioPanel', {
+                 extend: 'Ext.form.Panel',
+                 title: 'Recuperacao de dados de um Data Store',
+                 width: 400,
+                 height: 70,
+                 buttons: [
+                     { 
+                         text: 'Enviar', 
+                         name: 'enviar',
+                         handler: function() {
+                             console.log('Executando envio de requisicao');
+	
+                             // Criando objeto Store para armazenar dados
+                             dataStore = Ext.create('MyApp.store.UsuarioStore', {
+                                 data: [
+                                     // Em um cenário real, os dados viriam do servidor 
+                                     {codigo: 1, nome: 'Alexandre'},
+                                     {codigo: 2, nome: 'Guilherme'}
+                                 ]
+                             });
+
+                             // Exibe mensagem
+                             Ext.MessageBox.show({
+                                 title: 'Requisicao de dados',
+                                 msg: 'Dados recuperados com exito!',
+                                 width: 200,
+                                 buttons: Ext.MessageBox.OK,
+                                 icon:Ext.MessageBox.INFO
+                             });
+                        }
+                    },
+                    {
+                        text: 'Exibir',
+                        name: 'exibir',
+                        handler: function() {
+                            console.log('Exibindo primeiro nome do Data Store');
+                            var mensagem = "Nenhum";
+
+                            if (dataStore) {
+                                // Obtém valor do DataStore
+                                mensagem = dataStore.getAt(0).get('nome');
+                            }							
+
+                            console.log('Primeiro nome do Data Store: ' + mensagem);
+
+                            // Exibe mensagem
+                            Ext.MessageBox.show({
+                                title: 'Primeiro Nome exibido do Data Store',
+                                msg: mensagem,
+                                width: 200,
+                                buttons: Ext.MessageBox.OK,
+                                icon:Ext.MessageBox.INFO
+                            });
+                        }
+                    }
+                ]
+            });
+
+            Ext.onReady(function() {
+                // Data Store persistente entre as requisições
+                var dataStore;
+
+                var formulario = Ext.create('MyApp.view.UsuarioPanel', {
+                    renderTo: 'formulario'
+                });
+            });
+
+        </script>
+        <style type="text/css">
+            body {
+                margin-left: 5px;
+                margin-right: 5px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="formulario"></div>
+    </body>
+<html>

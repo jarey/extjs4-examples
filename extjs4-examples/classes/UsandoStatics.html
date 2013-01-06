@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.define('MyApp.Math', {
+                statics: {
+                    count: 0,
+                    appName: 'Math',
+                    sum: function(number1, number2) {
+                        return number1 + number2;
+                    }
+                },
+                constructor: function() {
+                    this.statics().count++;
+                    console.log('You instantiated the class: ' + this.self.appName);
+                    console.log('App Name: ' + this.statics().appName);
+                    console.log('Count is: ' + this.statics().count);
+                }
+            });
+
+            Ext.define('MyApp.MoreMath', {
+                extend: 'MyApp.Math',
+                statics: {
+                    appName: 'MoreMath',
+                    multiply: function(number1, number2) {
+                        return number1 * number2;
+                    }
+                },
+                constructor: function() {
+                    this.callParent();
+                }
+            });
+
+            Ext.onReady(function() {
+                var math1 = Ext.create('MyApp.Math');
+                var math2 = Ext.create('MyApp.Math');
+                var moreMath = Ext.create('MyApp.MoreMath');
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

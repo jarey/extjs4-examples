@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.define('My.sample.Person', {
+                name: 'Unknown',
+                constructor: function(name) {
+                    if (name) {
+                        this.name = name;
+                    }
+                },
+                eat: function(foodType) {
+                    Ext.MessageBox.alert('Food Type', this.name + " is eating: " + foodType);
+                }
+           });
+
+
+            Ext.onReady(function() {
+                var alexandre = Ext.create('My.sample.Person', 'Alexandre');
+                alexandre.eat('Salada');
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

@@ -1,0 +1,244 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            // Definindo Data Store inline para Sexo
+            Ext.define('MyApp.store.SexoStore', {
+                extend: 'Ext.data.Store',
+                fields: ['sigla', 'descricao'],
+                storeId: 'sexoStore',
+                data: [
+                    {"sigla": 'M', "descricao": 'Masculino'},
+                    {"sigla": 'F', "descricao": 'Feminino'}
+                ]
+            });
+
+            // Definindo Data Store inline para UF
+            Ext.define('MyApp.store.UFStore', {
+                extend: 'Ext.data.Store',
+                fields: ['sigla', 'descricao'],
+                storeId: 'ufStore',
+                data: [
+                    {"sigla": 'AC', "descricao": 'Acre'}, 
+                    {"sigla": 'AL', "descricao": 'Alagoas'},
+                    {"sigla": 'AM', "descricao": 'Amazonas'}, 
+                    {"sigla": 'AP', "descricao": 'Amapá'},
+                    {"sigla": 'BA', "descricao": 'Bahia'},
+                    {"sigla": 'CE', "descricao": 'Ceará'}, 
+                    {"sigla": 'DF', "descricao": 'Distrito Federal'},
+                    {"sigla": 'ES', "descricao": 'Espírito Santo'},
+                    {"sigla": 'GO', "descricao": 'Goiás'},
+                    {"sigla": 'MA', "descricao": 'Maranhão'}, 
+                    {"sigla": 'MG', "descricao": 'Minas Gerais'},
+                    {"sigla": 'MS', "descricao": 'Mato Grosso do Sul'},
+                    {"sigla": 'MT', "descricao": 'Mato Grosso'},
+                    {"sigla": 'PA', "descricao": 'Pará'},
+                    {"sigla": 'PB', "descricao": 'Paraíba'}, 
+                    {"sigla": 'PE', "descricao": 'Pernambuco'}, 
+                    {"sigla": 'PI', "descricao": 'Piauí'}, 
+                    {"sigla": 'PR', "descricao": 'Paraná'},
+                    {"sigla": 'RJ', "descricao": 'Rio de Janeiro'},
+                    {"sigla": 'RN', "descricao": 'Rio Grande do Norte'},
+                    {"sigla": 'RO', "descricao": 'Rondônia'},
+                    {"sigla": 'RR', "descricao": 'Roraima'},
+                    {"sigla": 'RS', "descricao": 'Rio Grande do Sul'},
+                    {"sigla": 'SC', "descricao": 'Santa Catarina'},
+                    {"sigla": 'SE', "descricao": 'Sergipe'},
+                    {"sigla": 'SP', "descricao": 'São Paulo'},
+                    {"sigla": 'TO', "descricao": 'Tocantins'}
+                ]
+            });
+
+            // Definindo Panel para Cliente
+            Ext.define('MyApp.view.ClientePanel', {
+                extend: 'Ext.form.Panel',
+
+                title: 'Cadastro de cliente',
+
+                width: 750,
+                labelWidth: 200,
+
+                bodyPadding: 10,
+
+                url: './salvarCliente.do',
+
+                items: [
+                    {
+                        xtype: 'textfield', 
+                        fieldLabel: 'Nome Completo', 
+                        name: 'nome', 
+                        allowBlank: false,
+                        size: 70,
+                        maxLength: 100
+                    },
+                    {
+                        xtype: 'combobox', 
+                        fieldLabel: 'Sexo', 
+                        name: 'sexo', 
+
+                        store: Ext.create('MyApp.store.SexoStore'),
+                        queryMode: 'local',
+                        displayField: 'descricao',
+                        valueField: 'sigla',
+                        autoSelect: true,
+                        editable: false,
+                            
+                        allowBlank: false
+                    },
+                    {
+                        xtype: 'datefield',
+                        fieldLabel: 'Data de Nascimento',
+                        name: 'dataNascimento',
+                        allowBlank: false,
+                        submitFormat: 'm/d/y'
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'RG',
+                        name: 'rg',
+                        allowBlank: false,
+                        regex: /\d{2}[.]\d{3}[.]\d{3}[-](\d{1}|[xX])/,
+                        regexText: 'Digite um RG no formato 99.999.999-9',
+                        size: 12,
+                        maxLength: 12
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Orgão de Emissor',
+                        name: 'emissor',
+                        allowBlank: false,
+                        size: 6,
+                        maxLength: 6
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'CPF',
+                        name: 'cpf',
+                        allowBlank: false,
+                        regex: /\d{3}[.]\d{3}[.]\d{3}[-]\d{2}/,
+                        regexText: 'Digite um CPF no formato 99.999.999-99', 
+                        size: 14,
+                        maxLength: 14
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'CEP',
+                        name: 'cep',
+                        allowBlank: false,
+                        regex: /\d{5}[-]\d{3}/,
+                        regexText: 'Digite um CEP no formato 99999-999',
+                        size: 9,
+                        maxLength: 9
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Logradouro',
+                        name: 'logradouro',
+                        allowBlank: false,
+                        size: 70,
+                        maxLength: 100
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Complemento',
+                        name: 'complemento',
+                        allowBlank: true,
+                        size: 60,
+                        maxLength: 60
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Cidade',
+                        name: 'cidade',
+                        allowBlank: false,
+                        size: 60,
+                        maxLength: 80
+                    },
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Bairro',
+                        name: 'bairro',
+                        allowBlank: false,
+                        size: 60,
+                        maxLength: 80
+                    },
+                    {
+                        xtype: 'combobox',
+                        fieldLabel: 'Estado',
+                        name: 'estado',
+                        store: Ext.create('MyApp.store.UFStore'),
+                        queryMode: 'local',
+                        displayField: 'descricao',
+                        valueField: 'sigla',                            
+                        autoSelect: true,
+                        editable: false,
+                        
+                        allowBlank: false 
+                    }
+                ],
+                 buttons: [
+                    {
+                        text: 'Salvar',
+                        formBind: true,
+                        handler: function() {
+                            console.log('Enviando dados para o servidor');
+                            var form = this.up('form').getForm();
+                            if (form.isValid()) {
+                                form.submit({
+                                    success: function(form,action) {
+                                        Ext.MessageBox.show({
+                                            title: 'Salvar Dados',
+                                            msg: 'Dados salvos com sucesso',
+                                            width: 200,
+                                            buttons: Ext.MessageBox.OK,
+                                            icon: Ext.MessageBox.INFO
+                                        });
+                                    },
+                                    failure: function(form,action) {
+                                        Ext.MessageBox.show({
+                                            title: 'Salvar Dados',
+                                            msg: 'Ocorreu um erro ao salvar os dados: ' + action.response.status + ' - ' + action.response.statusText,
+                                            width: 200,
+                                            buttons: Ext.MessageBox.OK,
+                                            icon: Ext.MessageBox.ERROR 
+                                        });                                            
+                                    }
+                                });
+                            }
+                        }
+                    },
+                    {
+                        text: 'Limpar',
+                        handler: function() {
+                            console.log('Limpando formulario');
+                            this.up('form').getForm().reset();
+                        }
+                    }
+                ]
+
+            });
+
+            Ext.onReady(function() {
+                var clientePanel = Ext.create('MyApp.view.ClientePanel', {
+                    renderTo: 'painel'
+                });
+            });
+        </script>
+        <style type="text/css">
+            body {
+                margin-left: 5px;
+                margin-right: 5px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="painel"></div>
+    </body>
+</html>
+

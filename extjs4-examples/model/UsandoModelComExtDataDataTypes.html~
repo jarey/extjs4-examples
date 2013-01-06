@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+           Ext.define('Patient', {
+               extend: 'Ext.data.Model',
+               fields: [
+                   {name: 'name'},
+                   {name: 'age', type: Ext.data.Types.INT},
+                   {name: 'phone', type: Ext.data.Types.STRING},
+                   {name: 'gender', type: Ext.data.Types.STRING},
+                   {name: 'birthday', type: Ext.data.Types.DATE, dateFormat: 'm/d/Y'},
+                   {name: 'alive', type: Ext.data.Types.BOOLEAN, defaultValue: true},
+                   {name: 'weight', type: Ext.data.Types.FLOAT},
+                   {name: 'weightKg', type: Ext.data.Types.FLOAT,
+                       convert: function(value, record) {
+                           var weightPounds = record.get('weight');
+                           return Math.round(weightPounds * 0.45359237);
+                       }
+                   }
+               ],
+
+               getBasicInfo: function() {
+                   var info = 'Name: ' + this.get('name');
+                   info += ' - Gender: ' + this.get('gender');
+                   info += ' - Age: ' + this.get('age');
+                   return info;
+               }
+            });
+
+            Ext.onReady(function() {
+                var patient = Ext.create('Patient', {
+                    name: 'Loiane Groner',
+                    age: 25,
+                    phone: '9876-5432',
+                    gender: 'F',
+                    birthday: '05/26/1986',
+                    weight: 150
+                });
+
+                console.log(patient.getBasicInfo());
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

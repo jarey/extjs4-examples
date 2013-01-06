@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            //Ext.define deve ficar fora de Ext.onReady
+
+            Ext.define('Pessoa', {
+                // Atributos com getters e setters automaticos
+                config: {
+                    nome: null, //getNome, setNome, applyNome e resetNome
+                    sexo: null, //getSexo, setSexo, applySexo e resetSexo
+                    dataNascimento: null //getDataNascimento, setDataNascimento, applyDataNascimento e resetDataNascimento
+                },
+
+                constructor: function(config) {
+                    this.initConfig(config);
+                }
+            });
+
+            Ext.define('Trabalhador', {
+                extend: 'Pessoa',
+                config: {
+                    salario: null
+                },
+
+                construtor: function(config) {
+                    this.callParent(arguments);
+                    this.initConfig(config);
+                }
+            });
+
+            Ext.onReady(function() {
+                var alexandre = Ext.create('Pessoa', {
+                    nome: 'Alexandre', 
+                    sexo: 'M', 
+                    dataNascimento: '1986-12-16'
+                });
+
+                alexandre.setNome('Alexandre Arcanjo de Queiroz');
+
+                console.log('Pessoa.nome: ' + alexandre.getNome());
+                console.log('Pessoa.sexo: ' + alexandre.getSexo());
+                console.log('Pessoa.dataNascimento: ' + alexandre.getDataNascimento());
+                
+                var gabriela = Ext.create('Trabalhador', {
+                    nome: 'Gabriela', 
+                    sexo: 'F', 
+                    dataNascimento: '1989-10-15', 
+                    salario: 1500.00
+                });
+
+                console.log('Trabalhador.nome: ' + gabriela.getNome());
+                console.log('Trabalhador.sexo: ' + gabriela.getSexo());
+                console.log('Trabalhador.dataNascimento: ' + gabriela.getDataNascimento());
+                console.log('Trabalhador.salario: ' + gabriela.getSalario());
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
