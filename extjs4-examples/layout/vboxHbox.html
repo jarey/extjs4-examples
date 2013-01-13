@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title></title>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.onReady(function() {
+
+                Ext.create('Ext.container.Viewport', {
+                    renderTo: Ext.getBody(),
+                    layout: {
+                        type: 'vbox',
+                        align: 'center'
+                    },
+                    items: [
+                        {
+                            xtype: 'panel',
+                            title: 'Filmes',
+                            width: 500,
+                            bodyPadding: 10,
+                            style: 'margin: 10px',
+                            layout: {
+                                type: 'vbox',
+                                align: 'center'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    layout: {
+                                        type: 'hbox'
+                                    },
+                                    style: 'margin: 10px',
+                                    items: [
+                                        {
+                                            xtype: 'button',
+                                            text: 'Anterior',
+                                            style: 'margin: 5px'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Próximo',
+                                            style: 'margin: 5px'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Novo',
+                                            style: 'margin: 5px'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Editar',
+                                            style: 'margin: 5px'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Excluir',
+                                            style: 'margin: 5px'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Salvar',
+                                            style: 'margin: 5px',
+                                            disabled: true
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Cancelar',
+                                            style: 'margin: 5px',
+                                            disabled: true
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    layout: {
+                                        type: 'vbox'
+                                    },
+                                    items: [
+                                        { 
+                                            xtype: 'textfield', 
+                                            fieldLabel: 'Filme',
+                                            name: 'filme'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Classificação',
+                                            name: 'classificacao'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                });    
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

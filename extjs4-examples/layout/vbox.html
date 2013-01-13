@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title></title>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.define('MyApp.store.SexoStore', {
+                extend: 'Ext.data.Store',
+                fields: [
+                    'id', 
+                    'descricao'
+                ],
+                data: [
+                    {id: 'M', descricao: 'Masculino'},
+                    {id: 'F', descricao: 'Feminino'}
+                ]
+            });
+
+            Ext.onReady(function() {
+                var sexoStore = Ext.create('MyApp.store.SexoStore');
+
+                Ext.create('Ext.container.Viewport', {
+                    renderTo: Ext.getBody(),
+                    layout: {
+                        type: 'vbox',
+                        align: 'center'
+                    },
+                    items: [
+                        {
+                            xtype: 'panel',
+                            title: 'Dados Pessoais',
+                            width: 500,
+                            bodyPadding: 10,
+                            style: 'margin: 10px',
+                            items: [
+                                { 
+                                    xtype: 'textfield', 
+                                    fieldLabel: 'Nome',
+                                    name: 'nome'
+                                },
+                                {
+                                    xtype: 'combobox',
+                                    fieldLabel: 'Sexo',
+                                    name: 'sexo',
+                                    editable: false,
+                                    store: sexoStore,
+                                    queryMode: 'local',
+                                    displayField: 'descricao',
+                                    valueField: 'id'
+                                },
+                                {
+                                    xtype: 'datefield',
+                                    fieldLabel: 'Data de Nascimento',
+                                    name: 'dataNascimento'
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'panel',
+                            title: 'Dados Profissionais',
+                            width: 500,
+                            style: 'margin: 10px',
+                            bodyPadding: 10,
+                            items: [
+                                { 
+                                    xtype: 'textfield',
+                                    fieldLabel: 'Profissão',
+                                    name: 'profissao'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    fieldLabel: 'Empresa',
+                                    name: 'empresa'
+                                }
+                            ]
+                        }
+                    ]
+                });    
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

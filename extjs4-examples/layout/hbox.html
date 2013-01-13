@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title></title>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css"></link>
+        <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+        <script type="text/javascript" src="../extjs/locale/ext-lang-pt_BR.js"></script>
+        <script type="text/javascript">
+            Ext.onReady(function() {
+
+                Ext.create('Ext.container.Viewport', {
+                    renderTo: Ext.getBody(),
+                    layout: {
+                        type: 'hbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'container',
+                            width: '75%',
+                            style: 'margin: 10px',
+                            items: [
+                                {
+                                    xtype: 'panel',
+                                    title: 'Title',
+                                    height: 100
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'container',
+                            width: '25%',
+                            layout: {
+                                type: 'vbox',
+                                align: 'left'
+                            },   
+                            style: 'margin: 10px',
+                            items: [
+                                {
+                                    xtype: 'textfield',
+                                    name: 'username',
+                                    fieldLabel: 'Username'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    name: 'email',
+                                    fieldLabel: 'E-mail'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    name: 'password',
+                                    inputType: 'password',
+                                    fieldLabel: 'Password'
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Signup for free'
+                                }
+                            ]
+                        }
+                    ]
+                });    
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
